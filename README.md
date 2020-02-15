@@ -1,1 +1,1 @@
-# Bakalaurinis
+I'm a bioengineering student from VGTU, Lithuania, and this is my bachelor's work.

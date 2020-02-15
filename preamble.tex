@@ -1,0 +1,178 @@
+% ------------------------------------------------------------------------------
+%                                   PREAMBLE                                  
+% ------------------------------------------------------------------------------
+\documentclass[a4paper, 12pt]{article}
+
+
+% ---------------------------- PAGRINDINIAI PAKETAI ----------------------------
+
+\usepackage[utf8]{inputenc}            % naudojama, kai .tex failas UTF-8 koduotės
+\usepackage[L7x]{fontenc}              % nurodoma lietuviško teksto koduotė Latin-7
+\usepackage[english, lithuanian]{babel}         % nurodoma, kad dokumentas yra lietuviškas
+
+\usepackage{lmodern}                   % dokumente naudojamas šriftas Latin Modern
+\usepackage{microtype}                 % optimizuojami atstumai tarp raidžių žodyje
+\usepackage{indentfirst}               % atitraukiama pirmoji naujo skyriaus eilutė
+\usepackage{icomma}                    % po kablelio skaičiaus viduryje nebus tarpo
+
+\usepackage{amsmath, amssymb, amsthm}  % matematiniai simboliai ir konstrukcijos
+\usepackage{mathtools}                 % standartinio AMS paketo amsmath išplėtimas
+\usepackage{graphicx}                  % grafinių failų įterpimas ir kiti nustatymai
+\usepackage{booktabs}                  % reikalingas tvarkingoms lentelėms sudaryti
+\usepackage{caption}                   % paveiksliukų ir lentelių užrašų formavimas
+\usepackage{geometry}                  % paraščių ir kitų lapo parametrų nustatymai
+\usepackage{hyperref}                  % interaktyvioms nuorodoms dokumente sukurti
+
+\usepackage{float}                     % for float enviroment positions
+\usepackage{enumitem}                  % for lists customization
+
+% ---------------------------- DOKUMENTO NUSTATYMAI ----------------------------
+
+\geometry{left = 3cm, top = 2cm, right = 1.5cm, bottom = 2cm} % paketo geometry parametrų nustatymai
+\linespread{1.5}                       % tarpas tarp eilučių
+
+\captionsetup{                         % paketo caption parametrų nustatymai (paveiksliuku, lenteliu numeravimas)
+    format = hang,                  
+    labelfont = bf,             % žodžio pav, lentelė, ... teksto stylius
+    textfont = footnotesize,    % caption teksto dydis
+    justification = centering, 
+    % skip = 0pt,               % atstumas iki paveiksliuko, lentelės, ...
+    tablename = lentelė,        % caption pavadinimas prie table
+    figurename = pav,           % caption pavadinimas prie figure
+    labelsep = period           % atstumas tarp label (pav, ...) iki caption teksto
+}
+
+\hypersetup{                           % paketo hyperref parametrų nustatymai (linkai, citavimas)
+    unicode = true,
+    linktoc = all,
+    linktocpage = false, 
+    colorlinks = true,       % linkai yra spalvoti
+    linkcolor = black,       % \ref color
+    filecolor = Maroon, % \href{run:}{} color
+    urlcolor = blue,         % url color
+    citecolor = blue,        % \cite color          
+    breaklinks = true 
+    % pdfauthor = {Autorius},  % pdf dokumento meta-duomenys (autorius)
+    % pdftitle = {Pavadinimas} % pdf dokumento meta-duomenyse (pavadinimas)
+}
+
+\graphicspath{{figures/}}    % paveikliuku folderis (kad būtų galima nurodyti tik pavadinimą)
+
+
+% ----------------------- PAPILDOMI PAKETAI IR NUSTATYMAI -----------------------
+
+
+\usepackage{pdfpages}		% pdf puslapių importavimui
+\usepackage{titlesec}                  % leidžia keisti skyriaus pavadinimo stilių
+\titlelabel{\thetitle.\quad}           % dedamas taškas po skyriaus numeriu tekste
+\let\tocnumdot\numberline              % uždeda tašką po skyriaus numeriu turinyje
+\def\numberline#1{\tocnumdot{#1.}} 
+
+\usepackage{tocloft}                                  % format and control table of contents
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % for dots in sections toc 
+
+\usepackage{bbm}                      % matematinio teksto ir simbolių formatavimas
+\usepackage{xfrac}                    % display `small', nice fractions (alternative nicefrac)
+\usepackage{siunitx}                  % SI vienetų paketas
+
+% \setlength{\parindent}{0pt}            % no paragraph indention
+% \setlength{\parskip}{1em}              % add spave between paragraphs
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}  % sukuriamas \subsubsubsection, kuris numeruojamas
+% \setcounter{secnumdepth}{4}
+% \setcounter{tocdepth}{4}
+
+%\usepackage[dvipsnames]{xcolor}           % papildomos spalvos
+%\definecolor{back}{RGB}{245, 245, 245}    % nauja spalva (pilka, tinkanti kodo fonui)
+
+\usepackage{algorithm}              % for writing algorithms
+\usepackage[noend]{algpseudocode}   % for writing algorithms
+
+\usepackage{verbatim}               % programinio kodo ir komentaru įterpimas
+\usepackage{fancyvrb}               % programinio kodo įterpimas ir formatavimas
+\usepackage{fvextra}                % programinio kodo formatavimas
+\usepackage{listings}               % programinio kodo įterpimas ir formatavimas (galima naudoti caption)
+\renewcommand{\lstlistingname}{išvestis} % lstlisting caption pavadinimas
+\lstset
+{ %Formatting for code in appendix (paprastas)
+    basicstyle = \linespread{1}\tt\small,
+    breakatwhitespace = false,
+    breaklines = true,
+    columns = fullflexible,
+    showspaces = false,
+    showstringspaces = false,
+    showtabs = false,
+    tabsize = 4,
+    % aboveskip = 5pt,
+    % belowskip = 5pt,
+    inputencoding=utf8,
+    escapeinside = {(*@}{@*)}
+}
+
+\usepackage{tabu, multirow} % lenteleje storesnes linijas padaryti, kelias eilutes apjungti
+\usepackage{diagbox}
+
+% Spalvoti TODO komentarai
+\usepackage[colorinlistoftodos]{todonotes}
+\newcommand{\TD}[1]{\todo[inline, color=red!40]{#1}}
+
+% ------------------------- NELABAI REIKALINGI PAKETAI -------------------------
+% --------------------------- BET GALI BŪTI NAUDINGI ---------------------------
+
+\usepackage{multicol}                  % leidžia rašyti tekstą į kelis stulpelius
+\usepackage{lipsum}                    % for dummy text only
+\usepackage{titling}                   % for beutiful title
+\usepackage{pifont}                    % special symbols 
+\usepackage{physics}                   % for typesetting equations for physics
+% \usepackage{subcaption}                % subcaption in figures (not working with subfig)
+\usepackage{subfig}                    % for subfigures in figure 
+\usepackage{wrapfig}                   % wrap text around figures 
+
+
+\setlist[enumerate]{ % list formatting
+    itemsep = 0.1pt,
+    topsep = 5pt
+}
+\setlist[itemize]{ % list formatting
+    itemsep = 0.1pt,
+    topsep = 5pt
+}
+
+\lstdefinestyle{fancycode}{                        % aplinkos lstlisting nustatymai graziam kodo iterpimui:
+                                                   % KODE REIKES NURODYTI [style=fancycode]
+    backgroundcolor = \color{back},           % colour for the background
+    commentstyle = \it\color{magenta},        % style of comments
+    keywordstyle = \color{blue},              % style of keywords
+    numberstyle = \tiny\color{black},         % style used for line-numbers
+    stringstyle = \color{ForestGreen},        % style of strings
+    basicstyle = \linespread{1}\footnotesize, % font size/family/etc. for source 
+    breakatwhitespace = false,                % sets if automatic breaks should only happen at whitespaces
+    columns = fullflexible,                   % for optimal spacing between characters
+    keepspaces = true,                        % keep spaces in the code, useful for indetation
+    breaklines = true,                        % automatic line-breaking       
+    %captionpos = b,                          % position of caption (t/b)
+    numbers = left,                           % position of line numbers (left/right/none)
+    numbersep = 12pt,                         % distance of line-numbers from the code
+    showspaces = false,                       % emphasize spaces in code 
+    showstringspaces = false,                 % emphasize spaces in strings 
+    showtabs = false,                         % emphasize tabulators in code
+    tabsize = 2,                              % default tabsize
+    frame = trBL,                             % showing frame outside code 
+%                                             %(none/leftline/topline/bottomline/lines/single/shadowbox/trbl)
+    escapeinside = {(*@}{@*)},                % specify characters to escape from source code to LATEX
+    rulecolor = \color{gray},                 % Specify the colour of the frame-box
+    frameround = fttt,                        % from top-right (t - round)
+    %framerule = 2mm,                          % margin of frame
+    inputencoding=utf8,
+    aboveskip = 20pt,                         % space above 
+    belowskip = 15pt                          % space below
+}
+
+\newcommand{\file}[1]{\href{run:#1}{#1}}   % komanda failo pavadinimui iterpti, kad ji galima butu atidaryti is pdf
+\renewcommand{\eqref}[1]{\hyperref[#1]{\textbf{\footnotesize \ref{#1}}}} % kad eqref numerius boldintu
+
+% \definecolor{black1}{RGB}{95, 95, 95}
+% \renewcommand{\_}{{\color{black1} \underline{\hspace{0.35em}}}} % apatinis pabraukimas
+
+% \usepackage{slantsc} % combine two font styles
+% \newcommand{\textscit}[1]{\textsl{\textsc{#1}}} % small caps italic

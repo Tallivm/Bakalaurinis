@@ -1,0 +1,48 @@
+% TIK ŠĮ FAILĄ REIKIA KOMPILIUOTI
+
+\input{preamble.tex}
+\usepackage{newtxmath}
+\usepackage[style=dutch]{csquotes}
+\newcommand{\angstrom}{\textup{\AA}}
+\def\UrlBreaks{\do\/\do-}
+
+\begin{document}
+
+\includepdf[page={1}]{titulinis}
+\includepdf[page={1}]{antras}
+
+\tableofcontents
+\pagebreak
+
+%---------------------
+%  ĮVADAS
+%---------------------
+
+\section*{ĮVADAS}
+\addcontentsline{toc}{section}{ĮVADAS} 
+
+Baltymo sąveikos su kitomis molekulėmis supratimas yra svarbus skirtingose biochemijos srityse, ypač farmacijos ir biofarmacijos srityse.\cite{hochuli_visualizing_2018}\cite{sethi_molecular_2019} Proteino--ligando kompleksų dėsnių suvokimas yra reikšmingas naujų vaistų atradimui - vaistai paprastai užima ligando vietą komplekse. Naujo vaisto kūrimas įprastai prasideda nuo didelės kolekcijos ligandų rinkimo; kiekvieną iš šių ligandų planuojama išanalizuoti \textit{in vitro} kaip potencialų vaistą. Aišku, tai reikalauja daug resursų ir laiko. Baltymo--ligando komplekso modeliavimas \textit{in silico} ir tolimesnė aktyvių ligandų virtuali atranka yra metodas, leidžiantis žymiai palengvinti naujo vaisto kūrimo procesą laiko ir kainos atžvilgiu. Šio metodu galima palyginus greitai išskirti molekules, turinčias didžiausią potencialą, vietoje pilnos kolekcijos analizės. \cite{berry_practical_2015}\cite{sethi_molecular_2019}
+
+Sparčiai didėjanti skaičiavimo galia leidžia naudoti vis sudėtingesnius algoritmus baltymų modeliavimui bei jo surišimo su ligandu prognozavimui. Ypač gerus rezultatus parodo mašininio mokymosi algoritmai, nes dažnai nereikalauja papildomų žinių apart baltymo ir ligando molekulinės struktūros ir/ar fiziko--cheminių savybių. Tačiau mašininio mokymosi algoritmo rezultatus priklauso nuo turimų duomenų kiekiu ir kokybe: kuo duomenys kokybiškesni, tuo būna geresni tokių modelių rezultatai. Baltymų ir kitų junginių struktūrų ir parametrų duombazės nuolat pildosi naujais arba patobulintais duomenimis. Todėl kuriami vis nauji mašininio mokymosi modeliai, apmokinti ant dar išaugusios ir patobūlintos baltyminių kompleksų duombazės.\cite{meng_molecular_2011} Vienas toks modelis, paremtas dirbtiniu neuroniniu konvoliuciniu tinklu, bus pasiūlytas šitame darbe.
+
+Šio darbo tikslas yra sukurti naują baltymo--ligando surišimo prognozavimo įrankį (vertinimo funkciją), pagrįstą mašininio mokymosi algoritmu. Šio darbo iškeliami uždaviniai:
+\begin{enumerate}
+\item Išanalizuoti jau sukurtas vertinimo funkcijas, kurios sprendžia tą patį problemą, ir išsirinkti vieną iš jų kaip atramos tašką.
+\item Paruošti modelio kodą, išrinkti kokybišką baltymo--ligando kompleksų rinkinį ir apmokyti modelį naudojant šį rinkinį.
+\item Įvertinti apmokyto modelio prognozavimo rezultatus ir palyginti su panašių modelių įvertinimais.
+\end{enumerate}
+
+
+% ----------------------------------------------------------------
+%                         FAILŲ IMPORTAI                        
+% ----------------------------------------------------------------
+
+\input{literaturine}
+
+\input{metodai}
+
+\bibliographystyle{vgtu_darbas}
+\addcontentsline{toc}{section}{LITERATŪRA} % kad literatūra būtų pridėta į table of contents
+\bibliography{bakalaurinis}
+
+\end{document}
