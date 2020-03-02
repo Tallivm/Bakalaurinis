@@ -113,14 +113,24 @@ Nuostolių funkcijos reguliarizacija taip pat yra veiksmingas būdas mažinti pe
 
 Dirbtiniai neuroniniai tinklai yra mašininio mokymosi algoritmai, paremti gamtiniais neuroniniais tinklais.\cite{ragoza_proteinligand_2017} Dirbtinis neuroninis tinklas sudarytas iš neuronų sluoksnių, kurių būna du ir daugiau ir jie nuosekliai sujungti. Išoriniai sluoksniai yra \enquote{matomi}, o kiti sluoksniai yra paslėpti tarp jų ir vadinasi giliaisiais.\cite{schmidhuber_deep_2015} Ryšiai tarp neuronų turi svorius, kurie parodo to ryšio savotišką svarumą. Neuronai gali atlikti skirtingus pakeitimus ir būna įvairiai sujungti priklausant nuo tinklo tipo ir uždavinio. Neuroninių tinklų uždaviniai gali būti tam tikro \enquote{rašto} identifikavimas, signalo apdorojimas ir kiti, o galinis neuronų sluoksnis generuoja \enquote{atsakymą} - dažniausiai tai būna paduotos į tinklą informacijos klasifikavimas.\cite{ragoza_proteinligand_2017}
 
-Dirbtinio neuroninio tinklo ypatumas yra tame, kad žmogus gali logiškai interpretuoti tik pirmą ir paskutinį tinklo sluoksnius. Paprasčiausi neuroniniai tinklai turi tik du sluoksnius, tačiau dabar populiarėja gilieji neuroniniai tinklai (angl. \textit{Deep Neural Networks}), kurie gali turėti daugiau nei tris sluoksnius. Kaip būtent daugiasluoksnio neuroninio tinklo modelis atpažįsta tam tikrus požymius, iki šiol nėra tiksliai nustatyta. Iš to yra iškeliama svarbi problema: nesuprantama iki galo, kaip būtent veikia dirbtiniai neuroniniai tinklai. Šis efektas, kaip buvo minėta anksčiau, vadinamas \enquote{juodosios dėžės} efektu. Nepaisant to, gilieji neuroniniai tinklai plačiai naudojami bioinformatikoje.\cite{chen_hidden_2019}\cite{stepniewska-dziubinska_development_2018}
+Kaip buvo paminėta, euroninis tinklas sudarytas iš daugelio neuronų. Kiekvienas neuronas gauna kelias įvestis, kiekviena iš kurių turi savo svorį. Iš pradžių svorio reikšmės yra parenkamos atsitiktiniu būdu, tačiau keičiamos modeliui besimokant. Neurono produkto skaičiavimo formulė atrodo taip:
+\begin{equation}
+z=\sum_{j=1}^{k} x_{j} w_{k}+b w_{0}
+\end{equation}
+kur $w_k$ yra tam tikros įvesties svoris ir $b$ yra nuolydis (angl. \textit{bias}). Nuolydis yra papildoma įvestis, kurios reikšmė yra fiksuota. Jis yra svarbus modelio lankstumui.
+
+Dirbtinio neuroninio tinklo ypatumas yra tame, kad žmogus gali logiškai interpretuoti tik pirmą ir paskutinį tinklo sluoksnius. Paprasčiausi neuroniniai tinklai turi tik du sluoksnius, tačiau dabar populiarėja gilieji neuroniniai tinklai (angl. \textit{Deep Neural Networks}), kurie gali turėti daugiau nei tris sluoksnius. %Kaip būtent daugiasluoksnio neuroninio tinklo modelis atpažįsta tam tikrus požymius, iki šiol nėra tiksliai nustatyta. Iš to yra iškeliama svarbi problema: nesuprantama iki galo, kaip būtent veikia dirbtiniai neuroniniai tinklai. Šis efektas, kaip buvo minėta anksčiau, vadinamas \enquote{juodosios dėžės} efektu. Nepaisant to, 
+Gilieji neuroniniai tinklai plačiai naudojami bioinformatikoje.\cite{chen_hidden_2019}\cite{stepniewska-dziubinska_development_2018}
 
 Šiuo momentu egzistuoja daug skirtingų neuroninio tinklo išsidėstymų, pavyzdžiui rekursiniai (angl. \textit{recurrent neural network}) arba konvoliuciniai (angl. \textit{convolutional network}). Rekursinis tinklas turi neuronus, kurie savo išeinantį signalą vėl gauną praėjus fiksuotam laiko tarpui. Tai yra naudinga tyrinėjant sistemas, kur svarbu išlaikyti kontekstą (pavyzdžiui darbui su tekstu, kur prieš tai buvę žodžiai ir sakiniai yra reikšmingi sekančio žodžio prasmei). Šis principas buvo dar patobulintas ir 1997 m. išrastas ilgos trumpos atminties algoritmas (angl. \textit{long short-term memory}), kurio elementai gali nuspręsti, ar verta laikyti tam tikrą reikšmę neurono atmintyje. Rekursiniai tinklai ir natūralios kalbos apdorojimas (angl. \textit{natural language processing}) buvo analizuoti Jastrzębski et al.\cite{jastrzebski_learning_2018} kaip būdas spręsti bioinformatikos klasifikacijos problemas, kai duomenys apie molekules pateikiami SMILES formatu.
 
+\subsubsection{Konvoliuciniai neuroniniai tinklai}
+
 Konvoliuciniai neuroniniai tinklai dažniausiai naudojami paveikslėlių atpažinimui. Jie gali \enquote{atpažįsti} tam tikrus požymius (linijas, figūras, spalvas ir t.t.) ir pagal jas klasifikuoti paveikslėlį. Taip pat konvoliuciniai neuroniniai tinklai gerai tinka analizuoti daugiamates struktūras, pavyzdžiui baltymo molekulės struktūrą, ir yra perspektyvūs ligando įvedimo į baltymo vertinimui.\cite{hochuli_visualizing_2018} Ragoza et al.\cite{ragoza_proteinligand_2017} sėkmingai panaudojo konvoliucinį neuroninį tinklą baltymo--ligando kompleksų surišimo vertinimui. Jie aprašo konvoliucinių tinklų veikimo principą: kiekvienas tinklo sluoksnis bando atpažinti paveikslėlyje tam tikrą figūrą, ir kuo daugiau tinklas turi sluoksnių, tuo sudėtingesnius \enquote{raštus} jis gali identifikuoti ir klasifikuoti. Daugiau apie konvoliucinių neuroninių tinklų taikymą vertinimo funkcijose yra kalbama \ref{sec:vertinimo_funkciju_pavyzdziai} skyriuje.
 
-Šiame darbe bus naudojami konvoliuciniai neuroniniai tinklai vertinimo funkcijos kūrimui. 
-%Konvoliuciniai neuroniniai tinklai – plačiau (nes šis bus taikomas darbe).
+Konvoliucinio neuroninio tinklo pirmas sluoksnis yra atsakingas už tiesinę duomenų transformavimą. 
+
+\TD{Konvoliucinio grido pavyzdis}
 
 \subsubsection{Ligandų virtuali atranka}
 

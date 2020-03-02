@@ -29,15 +29,28 @@ kur $E^{vdw}$ ir $E^{hb}$ yra atitinkamai Van der Valso ir vandenilinių ryšių
 Įvedami į neuronini tinklą duomenys yra vektorių rinkinio pavidalo. Kiekvienas vektorius turi informaciją apie ligando atomą, artimiausius du ligando atomus ir du baltymo atomus. Yra aprašomi atomų tipai (pvz. N, C), daliniai krūviai (slankiojančio kablelio skaičiais), atstumai tarp pirmojo atomo ir kitų atomų (slankiojančio kablelio neneigiamas skaičius; pirmasis atomas turės 0), bei aminorūgšties tipai, kuriai priklauso baltymo atomai (pvz. Gln). Atomų daliniai krūviai atvaizduoja elektronų pasiskirstymą molekulėje, kas nulemia molekulės tam tikras chemines savybes.
 Kiekvienas kompleksas po ligando įvedimo į baltymą su \emph{LeDock} pagalba turi informaciją apie baltymo ir ligando atomų koordinates trimatėje erdvėje, bei atomų tipus, tačiau neturi informacijos apie atomų dalinius krūvius. Jie yra skaičiuojami naudojant \emph{OpenBabel} įrankį ir pasirenkant EEM algoritmą. % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3716427/ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4667495/
 Jis buvo pasirinktas todėl, kad pagal \cite{} ir \cite{} straipsnius, EEM algoritmas skaičiuoja dalinius krūvius ypač aukštu tikslumu.
-\TD{EEM formulės}
 
-
-ir taikant Gasteigerio algoritmą. Skaičiuojant $Q_i$ dalinį krūvį $i$ atomui, yra tokia formulė\cite{gasteiger_new_1978}:
+EEM skaičiuoja elektronegatyvumą kiekvienam atomui molekulėje pagal tokią formulę: %https://www.pamoc.it/kw_eem.html
 
 \begin{equation}
-Q_{i}=\sum_{a}\left\{\left[\sum_{j} \frac{1}{D_{i}}\left(x_{j}-x_{i}\right)+\sum_{k} \frac{1}{D_{k}}\left(x_{k}-x_{i}\right)\right]\left(\frac{1}{f}\right)^{a-1}\right\}
+\chi_{i}=\left(\chi_{i}^{\circ}+\Delta \chi_{i}\right)+2\left(\eta_{i}^{\circ}+\Delta \eta_{i}\right) q_{i}+k \sum_{i \neq j}^{N} \frac{q_{j}}{r_{i, j}}
 \end{equation}
-kur $j$ ir $k$ yra šalia esantys atomai, kurie turi didesnį ar mažesnį elektronegatyvumą; $x_i$, $x_j$ ir $x_k$ yra atitinkamų atomų eletronegatyvumai; $D_i$ yra maksimalus elektronegatyvumo skirtumas, $a$ -- ?, $f$ -- ?
+čia $\chi_{i}^{\circ}$ yra izoliuoto atomo $i$ elektronegatyvumas, $\Delta \chi_{i}$ yra jo patikslinimas turint omenyje atomo buvimą molekulėje; $\eta_{i}^{\circ}$ yra atomo kietumas; $q_{i}$ yra atomo krūvis; $k \sum_{i \neq j}^{N} \frac{q_{j}}{r_{i, j}}$ parodo elektrostatinius santykius tarp šio atomo ir kiekvieno kito atomo $j$ molekulėje.
+
+Tuomet bendras molekulės krūvis yra: 
+
+\begin{equation}
+Q=\sum_{i=1}^{N} q_{i}
+\end{equation}
+
+
+
+%ir taikant Gasteigerio algoritmą. Skaičiuojant $Q_i$ dalinį krūvį $i$ atomui, yra tokia formulė\cite{gasteiger_new_1978}:
+
+%\begin{equation}
+%Q_{i}=\sum_{a}\left\{\left[\sum_{j} \frac{1}{D_{i}}\left(x_{j}-x_{i}\right)+\sum_{k} \frac{1}{D_{k}}\left(x_{k}-x_{i}\right)\right]\left(\frac{1}{f}\right)^{a-1}\right\}
+%\end{equation}
+%kur $j$ ir $k$ yra šalia esantys atomai, kurie turi didesnį ar mažesnį elektronegatyvumą; $x_i$, $x_j$ ir $x_k$ yra atitinkamų atomų eletronegatyvumai; $D_i$ yra maksimalus elektronegatyvumo skirtumas, $a$ -- ?, $f$ -- ?
 
 
 \TD{docking\_data\_processor, aprašyti}
@@ -46,21 +59,22 @@ kur $j$ ir $k$ yra šalia esantys atomai, kurie turi didesnį ar mažesnį elekt
 
 \subsection{Neuroninio tinklo architektūra}
 
-Neuroninis tinklas sudarytas iš daugelio neuronų. Kiekvienas neuronas gauna kelias įvestis, kiekviena iš jurių turi savo svorį. Iš pradžių svorio reikšmės yra parenkamos atsitiktiniu būdu, tačiau keičiamos modeliui besimokant. Neurono produkto skaičiavimo formulė atrodo taip:
-\begin{equation}
-z=\sum_{j=1}^{k} x_{j} w_{k}+b w_{0}
-\end{equation}
-kur $w_k$ yra tam tikros įvesties svoris ir $b$ yra nuolydis (angl. \textit{bias}). Nuolydis yra papildoma įvestis, kurios reikšmė yra fiksuota. Jis yra svarbus modelio lankstumui.
+%Neuroninis tinklas sudarytas iš daugelio neuronų. Kiekvienas neuronas gauna kelias įvestis, kiekviena iš kurių turi savo svorį. Iš pradžių svorio reikšmės yra parenkamos atsitiktiniu būdu, tačiau keičiamos modeliui besimokant. Neurono produkto skaičiavimo formulė atrodo taip:
+%\begin{equation}
+%z=\sum_{j=1}^{k} x_{j} w_{k}+b w_{0}
+%\end{equation}
+%kur $w_k$ yra tam tikros įvesties svoris ir $b$ yra nuolydis (angl. \textit{bias}). Nuolydis yra papildoma įvestis, kurios reikšmė yra fiksuota. Jis yra svarbus modelio lankstumui.
 
 Pradinis neuroninio tinklo kodas yra paimtas iš \cite{pereira_boosting_2016}. Jis yra parašytas \emph{Python} 2.7 programavimo kalba. Šiam darbui jis buvo nežymiai pakeistas, kad atitiktų \emph{Python} 3.7 versijai. Taip pat šio kodo duomenų apdorojimo dalis yra pritaikyta darbui su \emph{Autodock Vina} programos failais, todėl buvo perrašyta tam, kad tiktų darbui su \emph{LeDock} programa. Šis neuroninis tinklas yra pavadintas \emph{DeepVS}. Jis yra konvoliucinis neuroninis tinklas ir operuoja su vektoriais. Tam jis naudoja tiesinį transformavimą, \emph{ReLU} bei \emph{softmax} aktyvacijos funkcijas, ir \emph{dropout} reguliarizacijos metodą.
-% galimai formules reikės pernešt į literatūrinę dalį??
+
 Tiesinis transformavimas yra pagrindinė konvoliucinio tinklo dalis. Ji transformuoja duomenų vektorių į kitų matmenų vektorių, naudodamas sekančią formulę:
 \begin{equation}
-y = x\cdot W^{T} + b
+%y = x\cdot W^{T} + b
+y = f(W\cdot z_{i} + b)
 \end{equation}
-kur $W$ yra svorių vektorius $\{w_1, w_2, ..., w_k\}$, $T$ yra \TD{???}
+kur $W$ yra svorių vektorius $\{w_1, w_2, ..., w_k\}$, $f$ yra hiperbolinė tangento funkcija, $b$ yra nuolydis.  %pereira DeepVS
 
-Po tiesinio transformavimo vektoriaus matmenys keičiasi  iki 'cf' dydžio. \TD{kas yra cf?} Tuomet yra taikoma ReLU funkcija. Tai yra netiesinė aktyvacijos funkcija: ji apdoroja gautą vektorių ir grąžina jo tikslią vertę, jei ji yra didesnė už nulį, priešingu atveju grąžina nulį. Ji dažniausiai yra naudojama konvoliuciniams neuroniniams tinklams, o jos formulė yra:
+$cf$ skaičius nurodo filtrų kiekį konvoliuciniame sluoksnyje. \TD{Perkelti konvoliucinių tinklų teoriją į literatūrinę, ir aprašyti filtrus?} Tuomet yra taikoma ReLU funkcija. Tai yra netiesinė aktyvacijos funkcija: ji apdoroja gautą vektorių ir grąžina jo tikslią vertę, jei ji yra didesnė už nulį, priešingu atveju grąžina nulį. Ji dažniausiai yra naudojama konvoliuciniams neuroniniams tinklams, o jos formulė yra:
 \begin{equation}
  g(z) = max\{0, z\}
 \end{equation}
@@ -73,6 +87,7 @@ P(y_{i} | x_{i}, W) = \frac{e^{f_{y_i}}}{\sum _j\cdot e^{f_j}}
 \end{equation}
 Po šios funkcijos gaunamas galutinis baltymo--ligando komplekso įvertinimas.
 
+Modelio apmokymui paprastai yra taikoma gradientinio nusileidimo funkcija (angl. \textit{stochastic gradient descent})
 
 %http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf
 
