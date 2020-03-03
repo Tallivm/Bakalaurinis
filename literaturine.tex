@@ -1,4 +1,4 @@
-% ŠIO FAILO NEREIKIA KOMPILIUOTI (MES ERRORĄ). KOMPILIUOK "referatas.tex"
+% !TEX root = referatas.tex
 
 \section{LITERATŪROS APŽVALGA IR ANALIZĖ}
 
@@ -88,25 +88,15 @@ Kitas įvertis, taikomas klasifikacijos metodams, yra plotas po kreive (angl. \t
 
 Vertinimo funkcijos patikrinimas dažnai vyksta naudojant kompleksus--\enquote{apgavikus} (angl. \textit{decoys}). Jie yra panašūs į realus aktyviai surištus kompleksus, tačiau iš tikrųjų nėra (arba bent jau neturi būti) aktyvūs. Populiariausios \enquote{apgavikų} duomenų bazės yra \enquote{DUD} (angl. \textit{A Directory of Useful Decoys}) bei \enquote{DUD-E} (angl. \textit{A Database of Useful Decoys: Enhanced}).\cite{berry_practical_2015} Tokie kompleksai yra generuojami kompiuteriniais metodais, dėl ko gali atsirasti šališkumas (angl. \textit{bias}), kaip teigia Reau et al.\cite{reau_decoys_2018} Šis šališkumas gali neigiamai paveikti ypač neuroniniu tinklu pagrįstos vertinimo funkcijos veikimą, nes tokios funkcijos savarankiškai atranda kompleksų klasifikacijos parametrus. Tokio šališkumo pavyzdys yra pateiktas straipsnyje\cite{chen_hidden_2019}, kurio autoriai teigia, kad \enquote{DUD-E} duombazėje yra analoginis šališkumas (angl. \textit{analogue bias}), dėl ko neuroninio tinklo vertinimo funkcijos gauna ypač aukštus įverčius (AUC~>~0,9). Autoriai paruošė konvoliucinių neuroninių tinklų modelį ir apmokė jį naudojant du skirtingus rinkinius: pilnus kompleksus ir tik vienus ligangus iš \enquote{DUD-E}. Rezultatai buvo labai panašūs ir abu gavo aukštą AUC įvertį, kas parodė, jog modelis klasifikuoja kompleksus neskiriant jokio dėmesio į baltymo receptoriaus struktūrą. Todėl autoriai siūlo stengtis nenaudoti kompiuteriu sugeneruotus \enquote{apgavikus}, o geriau naudoti eksperimentiškai analizuotus neaktyvius kompleksus. 
 
+%-------------------------------------------------
+%       MAŠININIS MOKYMAS
+%-------------------------------------------------
+
 \subsection{Mašininio mokymosi taikymas}
 
-Mašininio mokymosi algoritmai pasižymi tuo, kad įgauna savo funkcionalumą mokymosi metu ir pati atranda dėsningumus, kurių žmogui būtų sunku ir per ilgai nustatyti.\cite{stepniewska-dziubinska_development_2018} Iš kitos pusės, mašininio mokymosi funkcijos pasirinktų parametrų esmė ne visada yra žmogui suprantama. Šis efektas dar vadinasi \enquote{juodos dėžės} efektu (angl. \textit{\enquote{black box}}) ir dažniausiai pasireiškia taikant dirbtinius neuroninius tinklus,\cite{liu_classification_2015} apie kuriuos bus kalbama \ref{sec:neuroniniai_tinklai} skyriuje. Mašininis mokymasis gali būti prižiūrėtas arba ne (angl. \textit{supervised} ir \textit{unsupervised}). Pirmu atveju funkcijai yra nurodoma, ar mokymosi metu gautas rezultatas atitinka tikrovei, ir naudojant šią informaciją, funkcija keičia savo parametrus kad padidintų tikslumą. Neprižiūrėto mokymosi atveju, funkcija bando pati klasifikuoti turimus duomenis į grupes pagal parametrus, kuriuos pati pasirenka.\cite{schmidhuber_deep_2015} Baltymo--ligando komplekso surišimo vertinimo atveju, mašininis mokymasis turi būti prižiūrėtas.
-
-Pagrindinis mašininio mokymosi veikimo bendri etapai yra:
-\begin{itemize} 
-\item Didelės tikrų duomenų duombazės pasirinkimas: kuo daugiau duomenų ir kuo jie kokybiškesni bei apima daugiau galimų variantų, tuo geriau galima apmokinti funkciją.\cite{stepniewska-dziubinska_development_2018}
-\item Duomenų dalijimas į apmokymo ir testavimo rinkinius (dažnai 70/30 ar 80/20 santykiu). Apmokymo rinkinys būna didesnis dėl to, kad apmokymui reikia kuo daugiau duomenų.
-\item Funkcijos apmokymas naudojant tik apmokymo rinkinį: algoritmas keičia savo parametrus taip, kad kuo tiksliau atspėtų apmokymo duomenis, randa bendrus dėsningumus;
-\item Funkcijos patikrinimas ant testavimo duomenų: jei atsiranda didelis procentas blogai prognozuotų reikšmių, reiškia funkcija yra permokyta (angl. \textit{overfitted}). Jei teisingai prognozuotų reikšmių procentas panašus į gautą po funkcijos apmokymo ir kartu pakankamai aukštas, funkcija yra paruošta naudojimui ar tolimesniam testavimui.
-\end{itemize}
+Mašininio mokymosi algoritmai pasižymi tuo, kad įgauna savo funkcionalumą mokymosi metu ir pati atranda dėsningumus, kurių žmogui būtų sunku ir per ilgai nustatyti.\cite{stepniewska-dziubinska_development_2018} Iš kitos pusės, mašininio mokymosi funkcijos pasirinktų parametrų esmė ne visada yra žmogui suprantama. Šis efektas dar vadinasi \enquote{juodos dėžės} efektu (angl. \textit{\enquote{black box}}) ir dažniausiai pasireiškia taikant dirbtinius neuroninius tinklus.\cite{liu_classification_2015} Mašininis mokymasis gali būti prižiūrėtas arba ne (angl. \textit{supervised} ir \textit{unsupervised}). Pirmu atveju funkcijai yra nurodoma, ar mokymosi metu gautas rezultatas atitinka tikrovei, ir naudojant šią informaciją, funkcija keičia savo parametrus kad padidintų tikslumą. Neprižiūrėto mokymosi atveju, funkcija bando pati klasifikuoti turimus duomenis į grupes pagal parametrus, kuriuos pati pasirenka.\cite{schmidhuber_deep_2015} Baltymo--ligando komplekso surišimo vertinimo atveju, mašininis mokymasis turi būti prižiūrėtas.
 
 Mašininio mokymosi algoritmas gali spręsti klasifikacijos arba regresijos problemą.\cite{lehr_playing_2017} Klasifikacijos problemos pavyzdys būtų diagnozės išvedimas žinant tam tikrus parametrus - pavyzdžiui pacientų skyrimas į sergančius ir nesergančius pagal medicininės analizės rezultatus. Tuo metu regresijos problema yra susieta su tam tikro skaičiaus keitimu, o tokios problemos pavyzdys yra butų kainų prognozavimas. Prognozuojant komplekso $K_{d}$, galima taikyti abu sprendimus: klasifikacijos atveju tai būtų tiesiog ligandų sužymėjimas, parodantis ar jie susiriš su baltymų; regresijos atveju būtų bandoma prognozuoti tikslią $K_{d}$ vertę. Atitinkamai, klasifikuojančiai funkcijai užteks duombazės, kur yra pateikti galintys ir negalintys susirišti kompleksai (tam dažnai naudojami kompleksai--\enquote{apgavikai}). Tuo metu regresijos funkcijai bus reikalinga kompleksų duombazė su nustatytomis $K_{d}$ reikšmėmis.
-
-Mašininio mokymosi algoritmai gali persimokyti.\cite{ragoza_proteinligand_2017} Tai reiškia, kad jie gerai prognozuos duomenis, su kuriais mokėsi, bet blogai prognozuos kitus duomenis iš tos pačios srities. Taip atsitinka, kai modeliui pateikti duomenys neapima visų galimų variantų. Pavyzdžiui, modelis gali prisitaikyti prie tam tikros baltymų šeimos ir blogai prognozuoti kitos baltymų šeimos sąryšį su ligandu. Kitaip sakant, modelis neišmoko tam tikrų taisyklių, bet tiesiog \enquote{iškalė} duomenis mintinai. Permokymą galima pastebėti, kai mokymosi rinkinio prognozavimas pavyksta kuo puikiausiai, tuo pačiu metu su nepriklausomais duomenimis prognozavimas tampa labai klaidingas. Modelis tampa specifinis.\cite{lehr_playing_2017} Tai galima taisyti keliais būdais, vienas iš kurių yra nežymiai pakeistų duomenų pridėjimas (angl. \textit{data augmentation}).\cite{ragoza_proteinligand_2017} Pakeitimai turi būti nereikšmingi, kad modelis nepradėtų mokytis ant klaidingų duomenų. Pavyzdžiui jei kalbama apie konvoliucinius neuroninius tinklus, galima tą patį paveiksliuką pasukti arba pridėti nežymaus triukšmo. Baltymų-ligandų kompleksų atveju, jei modelis mokosi iš kompleksų trimačių struktūrų, galima tas struktūras įvairiai pasukti. 
-
-Kitas būdas kovoti su permokymu yra kryžminės kontrolės naudojimas (angl. \textit{cross-validation}).\cite{lehr_playing_2017}\cite{wojcikowski_performance_2017} Šiuo atveju duomenys dalinami į $k$ grupes. Toliau modelis mokosi naudojant $k-1$ grupių duomenis, o paskutinė grupė veikia kaip testavimo rinkinys. Šis procesas kartojasi $k$ kart, kiekvieną kartą išrenkama vis kita grupė testavimui. Taip įvyksta tolygus mokymasis su visais duomenimis.\cite{wojcikowski_performance_2017}
-
-Nuostolių funkcijos reguliarizacija taip pat yra veiksmingas būdas mažinti permokymą. Pačios žinomiausios yra L1 ir L2 reguliarizacijos. L1 algoritmas (dar žinomas kaip Lasso regresija) tiesiogiai mažina parametrų svorius. Parametrai, kurie turi mažesnį svorį, visai išnyksta. Taip modelis įgyja kontrastą, nes daugiau išryškėja lemtingi parametrai; tai puikiai tinka klasifikacijos metu atrinkti reikšmingus parametrus. L2 algoritmas (dar žinomas kaip gūbrio regresija, angl. \textit{ridge regression}) mažina parametrų kvadratinius svorius. Tuomet visi svoriai mažėja tolygiai, modelis tampa labiau generalizuotas.\cite{stepniewska-dziubinska_development_2018}
 
 \subsubsection{Dirbtiniai neuroniniai tinklai}
 \label{sec:neuroniniai_tinklai}
@@ -128,11 +118,50 @@ Gilieji neuroniniai tinklai plačiai naudojami bioinformatikoje.\cite{chen_hidde
 
 Konvoliuciniai neuroniniai tinklai dažniausiai naudojami paveikslėlių atpažinimui. Jie gali \enquote{atpažįsti} tam tikrus požymius (linijas, figūras, spalvas ir t.t.) ir pagal jas klasifikuoti paveikslėlį. Taip pat konvoliuciniai neuroniniai tinklai gerai tinka analizuoti daugiamates struktūras, pavyzdžiui baltymo molekulės struktūrą, ir yra perspektyvūs ligando įvedimo į baltymo vertinimui.\cite{hochuli_visualizing_2018} Ragoza et al.\cite{ragoza_proteinligand_2017} sėkmingai panaudojo konvoliucinį neuroninį tinklą baltymo--ligando kompleksų surišimo vertinimui. Jie aprašo konvoliucinių tinklų veikimo principą: kiekvienas tinklo sluoksnis bando atpažinti paveikslėlyje tam tikrą figūrą, ir kuo daugiau tinklas turi sluoksnių, tuo sudėtingesnius \enquote{raštus} jis gali identifikuoti ir klasifikuoti. Daugiau apie konvoliucinių neuroninių tinklų taikymą vertinimo funkcijose yra kalbama \ref{sec:vertinimo_funkciju_pavyzdziai} skyriuje.
 
-Konvoliucinio neuroninio tinklo pirmas sluoksnis yra atsakingas už tiesinę duomenų transformavimą. 
+Konvoliucinio neuroninio tinklo pirmas sluoksnis yra atsakingas už tiesinį duomenų transformavimą. Pasirenkamas filtro branduolys (angl. \textit{kernel}), tai yra svorių matrica. Filtro branduolys juda per duomenų matricą ir vyksta jo ir \enquote{uždengtos} duomenų dalies sandauga pakoordinačiui, tuomet po kiekvienos sandaugos gaunama skaičių suma ir užrašoma į atitinkamą naujos matricos vietą. Tai yra pavaizduota \ref{fig:convoliutional_pvz} pav., o visas procesas gali būti pavadintas sąsūkos operacija.
 
-\TD{Konvoliucinio grido pavyzdis}
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.6\linewidth]{convoliutional_pvz}
+\caption{Konvoliucinio sluoksnio veikimo principas. Kairėje pusėje pradinių duomenų matrica, tamsiai mėlyna paryškinta zona, uždengta filtro branduoliu. Branduolio svoriai yra nurodyti kampuose. Dešinėje pusėje žalia matrica yra rezultatas, su paryškintu langeliu, kuris atitinka dabartinę branduolio poziciją.}
+\label{fig:convoliutional_pvz}
+\end{figure}
 
-\subsubsection{Ligandų virtuali atranka}
+Kai yra gauta nauja matrica, ji yra praleidžiama pro aktyvacijos funkciją. Tai gali būti tiesinė, sigmoidės ar kitos formos funkcija, kuri veikia gautas reikšmes. Konvoliuciniams tinklams dažniausiai naudojama \emph{ReLU} funkcija. Tai yra netiesinė aktyvacijos funkcija: ji apdoroja gautą vektorių ir grąžina jo tikslią vertę, jei ji yra didesnė už nulį, priešingu atveju grąžina nulį. Jos formulė yra:
+\begin{equation}
+ g(z) = max\{0, z\}
+\end{equation}
+
+%Kad galutinės matricos dydis būtų toks pats, kaip pradinės matricos, yra naudojamas padidinimas (angl. \textit{padding}), tai yra papildomų reikšmių pridėjimas, \enquote{rėmelis} aplink duomenų matricos. Papildomos reikšmės dažniausiai yra nuliai.
+
+Galutinio rezultato apdorojimui naudojama \emph{softmax} funkcija. Tai yra aktyvacijos funkcija, kuri yra naudojama klasifikacijos uždaviniuose: ji konvertuoja vektoriaus reikšmes į tikimybes, kurių suma yra lygi vienetui. Šios tikimybės yra skaičiuojamos taip: paimama reikšmės eksponentė ir normalizuojama naudojant visų reikšmių eksponenčių sumą:
+\begin{equation}
+P(y_{i} | x_{i}, W) = \frac{e^{f_{y_i}}}{\sum _j\cdot e^{f_j}}
+\end{equation}
+
+\subsubsection{Dirbtinio neuroninio tinklo apmokymas}
+
+Mašininio mokymosi veikimo bendri etapai yra:
+\begin{itemize} 
+\item Didelės tikrų duomenų duombazės pasirinkimas: kuo daugiau duomenų ir kuo jie kokybiškesni bei apima daugiau galimų variantų, tuo geriau galima apmokinti funkciją.\cite{stepniewska-dziubinska_development_2018}
+\item Duomenų dalijimas į apmokymo ir testavimo rinkinius (dažnai 70/30 ar 80/20 santykiu). Apmokymo rinkinys būna didesnis dėl to, kad apmokymui reikia kuo daugiau duomenų.
+\item Funkcijos apmokymas naudojant tik apmokymo rinkinį: algoritmas keičia savo parametrus taip, kad kuo tiksliau atspėtų apmokymo duomenis, randa bendrus dėsningumus;
+\item Funkcijos patikrinimas ant testavimo duomenų: jei atsiranda didelis procentas blogai prognozuotų reikšmių, reiškia funkcija yra permokyta (angl. \textit{overfitted}). Jei teisingai prognozuotų reikšmių procentas panašus į gautą po funkcijos apmokymo ir kartu pakankamai aukštas, funkcija yra paruošta naudojimui ar tolimesniam testavimui.
+\end{itemize}
+
+Visų parametrų reikšmių patikrinimas gali užtrukti itin didelį laiko kiekį, todėl yra taikoma gradientinio nusileidimo algoritmas (angl. \textit{stochastic gradient descent}). Jis gali būti apibendrintas kaip iteratyvinis algoritmas, kuris prasideda nuo atsitiktinio funkcijos taško ir žingsneliais juda žemiausio funkcijos taško link, kai funkcijos $x$ reikšmės yra pasirinkti svoriai, o $y$ reikšmės - skirtumas tarp tikrų duomenų ir prognozuoto rezultato, arba klaidos dydis. Taigi yra ieškoma mažiausio $y$, kas būtų mažiausiai klaidingas svorių rinkinys. Žingsnio dydis vadinamas mokymo greičiu (angl. \textit{learning rate}) ir paprastai žymimas $\eta$; kuo jis didesnis, tuo didesniai žingsniais juda algoritmas ir gali apsilenkti žemiausią tašką, todėl patartina rinktis mažesnį $\eta$.
+
+Mašininio mokymosi algoritmai gali persimokyti.\cite{ragoza_proteinligand_2017} Tai reiškia, kad jie gerai prognozuos duomenis, su kuriais mokėsi, bet blogai prognozuos kitus duomenis iš tos pačios srities. Taip atsitinka, kai modeliui pateikti duomenys neapima visų galimų variantų. Pavyzdžiui, modelis gali prisitaikyti prie tam tikros baltymų šeimos ir blogai prognozuoti kitos baltymų šeimos sąryšį su ligandu. Kitaip sakant, modelis neišmoko tam tikrų taisyklių, bet tiesiog \enquote{iškalė} duomenis mintinai. Permokymą galima pastebėti, kai mokymosi rinkinio prognozavimas pavyksta kuo puikiausiai, tuo pačiu metu su nepriklausomais duomenimis prognozavimas tampa labai klaidingas. Modelis tampa specifinis.\cite{lehr_playing_2017} Tai galima taisyti keliais būdais, vienas iš kurių yra nežymiai pakeistų duomenų pridėjimas (angl. \textit{data augmentation}).\cite{ragoza_proteinligand_2017} Pakeitimai turi būti nereikšmingi, kad modelis nepradėtų mokytis ant klaidingų duomenų. Pavyzdžiui jei kalbama apie konvoliucinius neuroninius tinklus, galima tą patį paveiksliuką pasukti arba pridėti nežymaus triukšmo. Baltymų-ligandų kompleksų atveju, jei modelis mokosi iš kompleksų trimačių struktūrų, galima tas struktūras įvairiai pasukti. 
+
+Kitas būdas kovoti su permokymu yra kryžminės kontrolės naudojimas (angl. \textit{cross-validation}).\cite{lehr_playing_2017}\cite{wojcikowski_performance_2017} Šiuo atveju duomenys dalinami į $k$ grupes. Toliau modelis mokosi naudojant $k-1$ grupių duomenis, o paskutinė grupė veikia kaip testavimo rinkinys. Šis procesas kartojasi $k$ kart, kiekvieną kartą išrenkama vis kita grupė testavimui. Taip įvyksta tolygus mokymasis su visais duomenimis.\cite{wojcikowski_performance_2017}
+
+Nuostolių funkcijos reguliarizacija taip pat yra veiksmingas būdas mažinti permokymą. Pačios žinomiausios yra L1 ir L2 reguliarizacijos. L1 algoritmas (dar žinomas kaip Lasso regresija) tiesiogiai mažina parametrų svorius. Parametrai, kurie turi mažesnį svorį, visai išnyksta. Taip modelis įgyja kontrastą, nes daugiau išryškėja lemtingi parametrai; tai puikiai tinka klasifikacijos metu atrinkti reikšmingus parametrus. L2 algoritmas (dar žinomas kaip gūbrio regresija, angl. \textit{ridge regression}) mažina parametrų kvadratinius svorius. Tuomet visi svoriai mažėja tolygiai, modelis tampa labiau generalizuotas.\cite{stepniewska-dziubinska_development_2018}
+
+%-------------------------------------------------
+%       VIRTUALI ATRANKA, DUOMENYS
+%-------------------------------------------------
+
+\subsection{Ligandų virtuali atranka}
 
 Ligando įvedimas į baltymą daugiausia yra naudojamas vaistų projektavime. Prijungimų palyginimas leidžia nustatyti, kaip sąveikaus įvairios molekulės, ir taip atrenkami ligandai, kurie tikimiausiai bus veiksmingi vaistai. Savaime suprantama, kad vienos kompiuterinės analizės neužtenka: kiekviena atrinkta molekulė bus tiriama \textit{in vitro}, taip pat kiekvienas vaistas turi praeiti klinikinius tyrimus. Programinės įrangos panaudojimas molekulių prijungime yra esminis, kai norima sumažinti tiriamų molekulių skaičių iš pradinės ligandų duombazės.\cite{pereira_boosting_2016} Šis procesas vadinamas virtualia atranka (angl. \textit{virtual screening}). 
 

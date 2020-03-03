@@ -1,4 +1,4 @@
-% ŠIO FAILO NEREIKIA KOMPILIUOTI (MES ERRORĄ). KOMPILIUOK "referatas.tex"
+% !TEX root = referatas.tex
 
 % Sutrumpinimai:
 % ReLU - Rectified Linear Unit
@@ -65,29 +65,7 @@ Q=\sum_{i=1}^{N} q_{i}
 %\end{equation}
 %kur $w_k$ yra tam tikros įvesties svoris ir $b$ yra nuolydis (angl. \textit{bias}). Nuolydis yra papildoma įvestis, kurios reikšmė yra fiksuota. Jis yra svarbus modelio lankstumui.
 
-Pradinis neuroninio tinklo kodas yra paimtas iš \cite{pereira_boosting_2016}. Jis yra parašytas \emph{Python} 2.7 programavimo kalba. Šiam darbui jis buvo nežymiai pakeistas, kad atitiktų \emph{Python} 3.7 versijai. Taip pat šio kodo duomenų apdorojimo dalis yra pritaikyta darbui su \emph{Autodock Vina} programos failais, todėl buvo perrašyta tam, kad tiktų darbui su \emph{LeDock} programa. Šis neuroninis tinklas yra pavadintas \emph{DeepVS}. Jis yra konvoliucinis neuroninis tinklas ir operuoja su vektoriais. Tam jis naudoja tiesinį transformavimą, \emph{ReLU} bei \emph{softmax} aktyvacijos funkcijas, ir \emph{dropout} reguliarizacijos metodą.
-
-Tiesinis transformavimas yra pagrindinė konvoliucinio tinklo dalis. Ji transformuoja duomenų vektorių į kitų matmenų vektorių, naudodamas sekančią formulę:
-\begin{equation}
-%y = x\cdot W^{T} + b
-y = f(W\cdot z_{i} + b)
-\end{equation}
-kur $W$ yra svorių vektorius $\{w_1, w_2, ..., w_k\}$, $f$ yra hiperbolinė tangento funkcija, $b$ yra nuolydis.  %pereira DeepVS
-
-$cf$ skaičius nurodo filtrų kiekį konvoliuciniame sluoksnyje. \TD{Perkelti konvoliucinių tinklų teoriją į literatūrinę, ir aprašyti filtrus?} Tuomet yra taikoma ReLU funkcija. Tai yra netiesinė aktyvacijos funkcija: ji apdoroja gautą vektorių ir grąžina jo tikslią vertę, jei ji yra didesnė už nulį, priešingu atveju grąžina nulį. Ji dažniausiai yra naudojama konvoliuciniams neuroniniams tinklams, o jos formulė yra:
-\begin{equation}
- g(z) = max\{0, z\}
-\end{equation}
-
-Po šio žingsnio yra pritaikomas \emph{dropout} metodas. Tai yra atsitiktinių reikšmių išmetimas (atsitiktinių neuronų išjungimas), kas gerai veikia prieš modelio persimokymą. \emph{DeepVS} naudoja \emph{dropout} metodą su 0,5 tikimybe kiekvienai iš reikšmių būti išmestai. 
-
-Paskui tiesinis transformavimas kartojasi, šiuo metu iš 'cf' į 'h' dydį \TD{kas tai?}, tuomet vėl taikoma ReLU aktyvacijos funkcija bei \emph{dropout} metodas. Paskui vėl pakartojamas tiesinis transformavimas iki dviejų reikšmių vektoriaus, kuris paskui paduodamas \emph{softmax} funkcijai. Tai yra aktyvacijos funkcija, kuri yra naudojama klasifikacijos uždaviniuose: ji konvertuoja vektoriaus reikšmes į tikimybes, kurių suma yra lygi vienetui. Šios tikimybės yra skaičiuojamos taip: paimama reikšmės eksponentė ir normalizuojama naudojant visų reikšmių eksponenčių sumą:
-\begin{equation}
-P(y_{i} | x_{i}, W) = \frac{e^{f_{y_i}}}{\sum _j\cdot e^{f_j}}
-\end{equation}
-Po šios funkcijos gaunamas galutinis baltymo--ligando komplekso įvertinimas.
-
-Modelio apmokymui paprastai yra taikoma gradientinio nusileidimo funkcija (angl. \textit{stochastic gradient descent})
+Pradinis neuroninio tinklo kodas yra paimtas iš \cite{pereira_boosting_2016}. Jis yra parašytas \emph{Python} 2.7 programavimo kalba. Šiam darbui jis buvo nežymiai pakeistas, kad atitiktų \emph{Python} 3.7 versijai. Taip pat šio kodo duomenų apdorojimo dalis yra pritaikyta darbui su \emph{Autodock Vina} programos failais, todėl buvo perrašyta tam, kad tiktų darbui su \emph{LeDock} programa. Šis neuroninis tinklas yra pavadintas \emph{DeepVS}. Jis yra konvoliucinis neuroninis tinklas ir operuoja su vektoriais. Tam jis naudoja tiesinį transformavimą, \emph{ReLU}  aktyvacijos funkciją ir \emph{dropout} reguliarizacijos metodą. \emph{Dropout} metodas yra atsitiktinių reikšmių išmetimas (atsitiktinių neuronų išjungimas), kas gerai veikia prieš modelio persimokymą. \emph{DeepVS} naudoja \emph{dropout} metodą su 0,5 tikimybe kiekvienai iš reikšmių būti išmestai. Gale yra taikoma \emph{softmax} funkcija, po kurios gaunamas galutinis baltymo--ligando komplekso įvertinimas.
 
 %http://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf
 

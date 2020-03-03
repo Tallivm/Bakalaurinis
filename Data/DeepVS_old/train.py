@@ -476,9 +476,9 @@ if __name__ == '__main__':
     
     
     
-    
-    proteinNames = ['3klm', '3tfq', '1a4g', '1a5h', '1adw', '1ah3' #
-                    ,'1b8o', '1ckp', '1cx2', '1e3g', '1eve', '1f0r', '1fm9', '1hw8', '1i00']
+    proteinNames = ['3tfq']
+#    proteinNames = ['3klm', '3tfq', '1a4g', '1a5h', '1adw', '1ah3' #
+#                    ,'1b8o', '1ckp', '1cx2', '1e3g', '1eve', '1f0r', '1fm9', '1hw8', '1i00']
 #                     ,'1j8f', '1m17', '1nhz', '1ouk', '1p44', '1r4l', '1s3v', '1s6p', '1uou'
 #                     ,'1uy6', '1uze', '1w4r', '1xjd', '1xoi', '1xp0', '1z11', '2afx', '2b1p'
 #                     ,'2dg3', '2iwi', '2oo8', '2p1t', '2p54', '2src', '2vgo', '2vwz', '2w31'
