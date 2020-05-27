@@ -1,0 +1,12 @@
+LeDock score paduoti i modeli (kiekvienam mol atomui sudubliuot score)
+
+Paziureti aktyviu ir neaktyviu pKa pasiskistryma (DUD-E straipsnyje?)
+
+Ligandu balansavimas - 1:1
+
+
+ligandai gali b8ti nespecifiniai! Jei ligandas yra nespecifinis, jis gerai jungsis prie daug skirting7 baltym7 ir tod4l modelis gali tokius ligandus atskirt tiesiog be jokio proteino. Jei noriu specifi6kumo, tada su proteinu
+
+pabandyt XGBoost
+
+reamunes pallaust d4l molekuli7b klasterinima pagal panasumus
